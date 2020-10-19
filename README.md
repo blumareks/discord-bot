@@ -8,6 +8,7 @@ To use it clone it:
 
 ```
 git clone https://github.com/blumareks/discord-bot.git
+cd discord-bot
 ```
 
 Then Build your image (mind the trailing dot):
