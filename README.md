@@ -6,6 +6,10 @@ https://medium.com/@blumareks/yeah-a-discord-ai-powered-bot-baby-d9cb73b4775d
 
 To use it clone it:
 
+```
+git clone https://github.com/blumareks/discord-bot.git
+```
+
 Then Build your image (mind the trailing dot):
 
 ```
