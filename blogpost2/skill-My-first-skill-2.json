@@ -1,0 +1,311 @@
+{
+  "intents": [
+    {
+      "intent": "order",
+      "examples": [
+        {
+          "text": "Can I have"
+        },
+        {
+          "text": "I want"
+        },
+        {
+          "text": "I would like to order"
+        },
+        {
+          "text": "I would like to order pizza"
+        }
+      ],
+      "description": "I would like to order something"
+    },
+    {
+      "intent": "ping",
+      "examples": [
+        {
+          "text": "hello"
+        },
+        {
+          "text": "hey"
+        },
+        {
+          "text": "hi"
+        },
+        {
+          "text": "Ping"
+        },
+        {
+          "text": "pong"
+        }
+      ]
+    },
+    {
+      "intent": "whenSeason",
+      "examples": [
+        {
+          "text": "The new season is the next week?"
+        },
+        {
+          "text": "When a season starts"
+        },
+        {
+          "text": "When is the next season"
+        },
+        {
+          "text": "When it starts?"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "entity": "Apex",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Apex",
+          "synonyms": [
+            "apex",
+            "Apex Legends"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "Frotnite",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Fortnite",
+          "synonyms": [
+            "epic fornite",
+            "fortnite"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "pizza",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "pizza",
+          "synonyms": [
+            "cheese",
+            "Hawaiian ",
+            "pepperoni "
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sys-currency",
+      "values": [],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sys-date",
+      "values": [],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sys-time",
+      "values": [],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "title": "Anything else",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I didn't understand. You can try rephrasing."
+              },
+              {
+                "text": "Can you reword your statement? I'm not understanding."
+              },
+              {
+                "text": "I didn't get your meaning."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "node_2_1603127827595",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "ask-ready-to-order",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "ok, it will be ready in 10 minutes."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "values": [
+              {
+                "text": "ok, we are going to have it ready for you."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#order && @pizza",
+      "dialog_node": "node_2_1603127827595",
+      "previous_sibling": "node_6_1603732421035"
+    },
+    {
+      "type": "standard",
+      "title": "Next Apex Season",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "The next Apex Legends season starts on November 3rd. Watch it coming!"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#whenSeason && @Apex",
+      "dialog_node": "node_2_1603662567244",
+      "previous_sibling": "node_3_1603712476536"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "It is a beautiful day (Gibby)!"
+              },
+              {
+                "text": "I made it through (Wraith)!"
+              },
+              {
+                "text": "I will high five you all (Life)!"
+              },
+              {
+                "text": "I am ready today, ha, I am ready all month (Bang)!"
+              },
+              {
+                "text": "My papa would be proud of me (Wattson)!"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "conditions": "#ping",
+      "dialog_node": "node_3_1603712476536",
+      "previous_sibling": "Welcome"
+    },
+    {
+      "type": "standard",
+      "title": "Next season of Fortnite",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "The next season of Frotnite starts on November 30th."
+              },
+              {
+                "text": "Yay! Grind more - the new season of Fortnite starts on November 30th"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "conditions": "#whenSeason && @Frotnite",
+      "dialog_node": "node_6_1603732421035",
+      "previous_sibling": "node_2_1603662567244"
+    },
+    {
+      "type": "standard",
+      "title": "Welcome",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "It is a beautiful day (Gibby)!"
+              },
+              {
+                "text": "I think you haven't been even trying (Lifeline)!"
+              },
+              {
+                "text": "I'll high five you all (Path)!"
+              },
+              {
+                "text": "I made it through (Wraith)!"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "Welcome",
+      "disambiguation_opt_out": true
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "off_topic": {
+      "enabled": true
+    },
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "system_entities": {
+      "enabled": true
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "spelling_auto_correct": true
+  },
+  "learning_opt_out": false,
+  "name": "My first skill",
+  "language": "en",
+  "description": ""
+}
